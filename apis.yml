@@ -1,0 +1,36 @@
+aid: kiota
+name: Kiota
+description: >-
+  Kiota is an open source API client generator from Microsoft that creates strongly-typed clients from OpenAPI specifications in multiple languages.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - SDKs
+  - Code Generation
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/kiota/refs/heads/main/apis.yml
+created: '2026-03-25'
+modified: '2026-03-25'
+specificationVersion: '0.19'
+apis:
+  - aid: kiota:kiota
+    name: Kiota
+    description: >-
+      Kiota is an open source API client generator from Microsoft that creates strongly-typed clients from OpenAPI specifications in multiple languages.
+    humanURL: https://learn.microsoft.com/en-us/openapi/kiota/
+    tags:
+      - SDKs
+      - Code Generation
+    properties:
+      - type: Documentation
+        url: https://learn.microsoft.com/en-us/openapi/kiota/overview
+common:
+  - type: Website
+    url: https://learn.microsoft.com/en-us/openapi/kiota/
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/openapi/kiota/overview
+  - type: GitHub Organization
+    url: https://github.com/microsoft/kiota
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
