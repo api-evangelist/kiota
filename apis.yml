@@ -1,66 +1,144 @@
 aid: kiota
 name: Kiota
 description: >-
-  Kiota is an open source API client generator from Microsoft that produces
-  strongly-typed, lightweight clients from OpenAPI descriptions. It supports
-  C#, Go, Java, PHP, Python, Ruby, Swift, and TypeScript, with a focus on
-  minimal dependencies and idiomatic code patterns.
+  Kiota is Microsoft's open source (MIT) API client generator: a command line
+  tool that turns any OpenAPI-described API into a strongly-typed, lightweight
+  client in C#, Dart, Go, Java, PHP, Python, Ruby or TypeScript. It exists to
+  remove the need to take a dependency on a different hand-written SDK for every
+  API you call. Kiota generates only the source it needs on top of a small
+  per-language core library, keeps external dependencies minimal, and can target
+  a filtered subset of a large description. Beyond code SDKs it also emits
+  agent-facing plugin packages — apiplugin for Microsoft 365 Copilot declarative
+  agents, openai manifests, and API Manifest permission snapshots. Kiota is a
+  consumer of API descriptions rather than a publisher of an API: there is no
+  Kiota endpoint, base URL, API key or status page. Its surface is a CLI, runtime
+  libraries in eight package registries, a published OpenAPI extension
+  vocabulary, and a nine-rule description validation ruleset it runs before every
+  generation.
 type: Index
 accessModel:
-  pricing: freemium
-  onboarding: unknown
+  pricing: open-source
+  onboarding: self-service
   trial: false
   try_now: false
-  public: false
-  label: Freemium
-  confidence: medium
+  public: true
+  label: Open Source (MIT)
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
+  - https://github.com/microsoft/kiota/blob/main/LICENSE
+  - https://learn.microsoft.com/en-us/openapi/kiota/install
+  generated: '2026-08-06'
+  method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kiota.png
 tags:
   - Code Generation
   - Microsoft
   - OpenAPI
   - SDKs
+  - Developer Tools
+  - API Clients
+  - Open Source
+  - CLI
+  - JSON Schema
 url: >-
   https://raw.githubusercontent.com/api-evangelist/kiota/refs/heads/main/apis.yml
 created: '2026-03-25'
-modified: '2026-04-28'
+modified: '2026-08-06'
 specificationVersion: '0.19'
 apis:
   - aid: kiota:kiota
     name: Kiota
     description: >-
       Kiota generates strongly-typed, lightweight API clients from OpenAPI
-      descriptions in multiple languages with minimal dependencies and
-      idiomatic code patterns.
+      descriptions in C#, Dart, Go, Java, PHP, Python, Ruby and TypeScript, with
+      minimal dependencies and idiomatic code patterns, plus agent-facing plugin
+      packages. It is delivered as a CLI, a container image, a VS Code extension
+      and a set of per-language runtime libraries — not as a hosted service.
     humanURL: https://learn.microsoft.com/en-us/openapi/kiota/
     tags:
       - Code Generation
       - OpenAPI
       - SDKs
+      - CLI
     properties:
       - type: Documentation
         url: https://learn.microsoft.com/en-us/openapi/kiota/overview
+      - type: APIReference
+        url: https://learn.microsoft.com/en-us/openapi/kiota/using
       - type: GettingStarted
         url: https://learn.microsoft.com/en-us/openapi/kiota/quickstarts/
       - type: GitHubRepository
         url: https://github.com/microsoft/kiota
+      - type: CLI
+        url: cli/kiota-cli.yml
+      - type: ChangeLog
+        url: changelog/kiota-changelog.yml
 common:
+  - type: Website
+    url: https://learn.microsoft.com/en-us/openapi/kiota/
+  - type: Portal
+    url: https://learn.microsoft.com/en-us/openapi/kiota/
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/openapi/kiota/overview
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/openapi/kiota/using
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/openapi/kiota/quickstarts/
+  - type: Support
+    url: https://github.com/microsoft/kiota/issues
+  - type: Community
+    url: https://github.com/microsoft/kiota/discussions
+  - type: GitHubOrganization
+    url: https://github.com/microsoft/kiota
+  - type: SourceCode
+    url: https://github.com/microsoft/kiota
+  - type: Blog
+    url: https://devblogs.microsoft.com/microsoft365dev/
+  - type: License
+    url: https://github.com/microsoft/kiota/blob/main/LICENSE
+  - type: TermsOfService
+    url: https://learn.microsoft.com/en-us/legal/termsofuse
+  - type: PrivacyPolicy
+    url: https://privacy.microsoft.com/en-us/privacystatement
+  - type: CLI
+    url: cli/kiota-cli.yml
+  - type: Packages
+    url: packages/kiota-packages.yml
+  - type: SDKs
+    url: packages/kiota-packages.yml
+  - type: ChangeLog
+    url: changelog/kiota-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/kiota-lifecycle.yml
+  - type: Deprecation
+    url: https://learn.microsoft.com/en-us/openapi/kiota/support
+  - type: Authentication
+    url: authentication/kiota-authentication.yml
+  - type: Vocabulary
+    url: vocabulary/kiota-vocabulary.yml
+  - type: Rules
+    url: rules/kiota-validation-rules.yml
+  - type: Conformance
+    url: conformance/kiota-conformance.yml
+  - type: JSONSchema
+    url: json-schema/kiota-workspace-schema.json
+  - type: LLMsTxt
+    url: llms/kiota-llms.txt
+  - type: WellKnown
+    url: well-known/kiota-well-known.yml
+  - type: SecurityTxt
+    url: well-known/kiota-security.txt
+  - type: Security
+    url: security/kiota-vulnerability-disclosure.yml
   - type: VulnerabilityDisclosure
     url: security/kiota-vulnerability-disclosure.yml
   - type: DomainSecurity
     url: security/kiota-domain-security.yml
-  - type: Website
-    url: https://learn.microsoft.com/en-us/openapi/kiota/
-  - type: Documentation
-    url: https://learn.microsoft.com/en-us/openapi/kiota/overview
-  - type: GitHubOrganization
-    url: https://github.com/microsoft/kiota
-  - type: Blog
-    url: https://devblogs.microsoft.com/microsoft365dev/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-06'
+  status: enriched
+  artifacts_added: 11
+  pass: local-v1
