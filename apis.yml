@@ -74,6 +74,14 @@ apis:
       - type: ChangeLog
         url: changelog/kiota-changelog.yml
 common:
+  - type: Releases
+    url: https://github.com/microsoft/kiota/releases
+  - type: SecurityPolicy
+    url: https://github.com/microsoft/kiota/blob/main/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/microsoft/kiota/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/microsoft/kiota/blob/main/CONTRIBUTING.md
   - type: Website
     url: https://learn.microsoft.com/en-us/openapi/kiota/
   - type: Portal
