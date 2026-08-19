@@ -1,0 +1,62 @@
+generated: '2026-08-06'
+method: searched
+source: https://learn.microsoft.com/en-us/openapi/kiota/using#--disable-validation-rules---dvr
+description: >-
+  Kiota ships an OpenAPI description linter and runs it before every generation.
+  This is a genuine, published governance ruleset — it is the set of description
+  defects Microsoft considers serious enough to warn about before emitting a
+  client, and it is the closest thing in the API tooling ecosystem to an
+  opinionated "will this description produce a good SDK?" check. Each rule can be
+  suppressed individually with --disable-validation-rules <rule>, or all of them
+  (including the rules inherited from OpenAPI.net) with --disable-validation-rules all.
+  Per-client suppressions are persisted in the disabledValidationRules array of
+  .kiota/workspace.json.
+docs: https://learn.microsoft.com/en-us/openapi/kiota/using
+flag: --disable-validation-rules (--dvr)
+inherits: OpenAPI.net validation rules
+severity_model: >-
+  Every Kiota-specific rule below emits a warning; warnings do not stop
+  generation. There are no error-severity Kiota rules.
+rule_count: 9
+rules:
+  - id: DivergentResponseSchema
+    severity: warning
+    description: Returns a warning if an operation defines multiple different successful response schemas (200, 201, 202, 203).
+    why: A single operation with divergent success schemas cannot be given one strongly-typed return type.
+  - id: GetWithBody
+    severity: warning
+    description: Returns a warning if a GET request has a body defined.
+    why: Request bodies on GET are not portable across HTTP stacks and languages.
+  - id: InconsistentTypeFormat
+    severity: warning
+    description: 'Returns a warning if an inconsistent type/format pair is defined (for example, type: string, format: int32).'
+    why: An impossible type/format pair forces the generator to guess a primitive.
+  - id: KnownAndNotSupportedFormats
+    severity: warning
+    description: Returns a warning if a known format isn't supported for generation (for example, email, uri).
+    why: The format is recognised but has no target-language type, so it degrades to a plain string.
+  - id: MissingDiscriminator
+    severity: warning
+    description: Returns a warning if an anyOf or oneOf schema is used without a discriminator property name.
+    why: Without a discriminator the generated deserializer cannot pick the concrete type at runtime.
+  - id: MultipleServerEntries
+    severity: warning
+    description: Returns a warning if multiple servers are defined.
+    why: Kiota generates a single base URL into the client; multiple servers make that choice ambiguous.
+  - id: NoContentWithBody
+    severity: warning
+    description: Returns a warning if a response schema is defined for a 204 response.
+    why: A 204 has no body by definition, so the declared schema is unreachable.
+  - id: NoServerEntry
+    severity: warning
+    description: Returns a warning if no servers are defined.
+    why: With no server entry the generated client has no base URL and the caller must supply one.
+  - id: UrlFormEncodedComplex
+    severity: warning
+    description: Returns a warning if a URI form encoded response has a schema that contains complex properties.
+    why: Form encoding cannot faithfully round-trip nested objects.
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://learn.microsoft.com/en-us/openapi/kiota/using
+      status: 200

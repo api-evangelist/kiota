@@ -1,0 +1,90 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  https://github.com/microsoft/kiota/blob/main/CHANGELOG.md and
+  https://api.github.com/repos/microsoft/kiota/releases
+description: >-
+  Kiota keeps a Keep a Changelog formatted CHANGELOG.md in the repository root
+  and mirrors each version as a tagged GitHub Release. Versioning is Semantic
+  Versioning 2.0.0 (major.minor.patch); minor releases target the first Tuesday
+  of each month and patches ship as needed. This artifact captures the recent
+  window only — CHANGELOG.md is the source of truth. Note that the runtime
+  libraries (kiota-dotnet, kiota-java, kiota-python, kiota-typescript, kiota-go,
+  kiota-php, kiota-ruby) each keep their own separate changelog.
+docs: https://github.com/microsoft/kiota/blob/main/CHANGELOG.md
+releases: https://github.com/microsoft/kiota/releases
+format: Keep a Changelog 1.0.0
+versioning:
+  scheme: semver
+  spec: https://semver.org/spec/v2.0.0.html
+  current: 1.34.1
+  current_released: '2026-07-09'
+  cadence: Minor releases target the first Tuesday of every month; patches as needed; major releases as needed.
+  detail: lifecycle/kiota-lifecycle.yml
+entries:
+  - version: unreleased
+    additions:
+      - Model generation for schemas used by OpenAPI 3.1 webhooks (#6394)
+      - Resolution of JSON Schema 2020-12 $dynamicRef against $dynamicAnchor so recursive types generate correctly instead of degrading to UntypedNode (#7815)
+    highlights:
+      - 'Go: generated code always uses LF line endings so gofmt reports no diffs on Windows'
+      - Deterministic model class descriptions when a component schema is referenced from multiple properties (#7927)
+      - 'TypeScript: primitive binary union generation via ArrayBuffer, with deduplicated serialization branches'
+  - version: 1.34.1
+    date: '2026-07-09'
+    latest: true
+    highlights:
+      - Raised the namespace-segment / type-name shortening threshold to 200 characters so only very long names are truncated
+  - version: 1.34.0
+    date: '2026-07-08'
+    security: true
+    breaking:
+      - Workspace consumer identifiers (clientName/pluginName) and configuration keys are now containment-validated before use as filesystem path components
+    highlights:
+      - Fixed a path traversal vulnerability where a crafted consumer name (e.g. junk/../Victim) could overwrite another consumer's cached OpenAPI description (#7919)
+  - version: 1.33.0
+    date: '2026-07-06'
+    highlights:
+      - Oversized TypeScript namespace segments are shortened (directories only) so generation no longer fails on per-component filename limits (#7901)
+  - version: 1.32.5
+    date: '2026-07-03'
+    security: true
+    additions:
+      - '--allowed-external-origins parameter on every command that loads an OpenAPI description; external $refs are no longer loaded by default'
+      - Support for the isNonConsequential confirmation property in the x-ai-capabilities extension, mapped to plugin manifest 2.4 (#7857)
+      - DOM-surface regression test diffing the public API export of the published generator against the current changeset (#7858)
+    breaking:
+      - Removed support for specifying dependency install commands through the x-ms-kiota-info OpenAPI extension
+      - External references in OpenAPI descriptions are no longer resolved by default
+    highlights:
+      - Rejected unsafe static_template.file references in generated plugin manifests
+      - Workspace generation rejects outputPath values that are rooted or escape the workspace
+      - Sanitized client class and namespace names loaded from settings or x-ms-kiota-info
+  - version: 1.32.4
+    date: '2026-06-26'
+    security: true
+    highlights:
+      - 'Fixed a code injection vulnerability in PHP generation by escaping $ in double-quoted string literals (#7863)'
+  - version: 1.32.3
+    date: '2026-06-24'
+    security: true
+    highlights:
+      - Fixed a generated-source code injection vulnerability (CWE-94) in the C# emitter where newlines in externalDocs.description could break out of a /// doc comment (#7831)
+      - Fixed empty model generation when allOf inheritance is reached via a composed type (#7791)
+      - 'Fixed PHP generation emitting parent::__construct() for parent classes without a constructor (#7809)'
+  - version: 1.32.2
+    date: '2026-06-05'
+    highlights:
+      - Per-operation URL template overrides are now only emitted when an operation has required query parameters not shared by sibling operations (#7764)
+      - Updated to ESRP v12 signing (#7765)
+  - version: 1.32.1
+    date: '2026-06-03'
+    highlights:
+      - Fixed a regression where operations with only optional query-parameter differences lost their URL template override (#7754, #7755)
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://raw.githubusercontent.com/microsoft/kiota/main/CHANGELOG.md
+      status: 200
+    - url: https://api.github.com/repos/microsoft/kiota/releases
+      status: 200

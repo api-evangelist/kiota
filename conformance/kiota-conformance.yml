@@ -1,0 +1,140 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  https://learn.microsoft.com/en-us/openapi/kiota/overview,
+  https://learn.microsoft.com/en-us/openapi/kiota/support,
+  https://learn.microsoft.com/en-us/openapi/kiota/authentication,
+  https://github.com/microsoft/kiota (CHANGELOG.md, specs/, LICENSE)
+description: >-
+  Standards conformance read the direction that actually applies to Kiota: it is
+  a CONSUMER of specifications, not a publisher of an API. So the entries below
+  record which specifications Kiota reads, implements against, or emits — and,
+  where relevant, which it does not. This is deliberately not a compliance-program
+  claim; Microsoft publishes no Kiota-specific certification, because there is no
+  Kiota service to certify.
+posture: consumer-of-specifications
+standards:
+  - id: openapi-3.0
+    conforms: true
+    role: consumes
+    evidence: >-
+      Kiota's stated purpose is generating an API client from any OpenAPI-described
+      API, and it "uses the full capabilities of OpenAPI descriptions"
+      (learn.microsoft.com/en-us/openapi/kiota/overview).
+  - id: openapi-3.1
+    conforms: true
+    role: consumes
+    evidence: >-
+      CHANGELOG records model generation for schemas used by OpenAPI 3.1 webhooks
+      (#6394), and the validation ruleset handles 3.1 composition keywords.
+  - id: json-schema-2020-12
+    conforms: true
+    role: consumes
+    evidence: >-
+      CHANGELOG (Unreleased) adds resolution of $dynamicRef against schemas
+      declaring $dynamicAnchor, the JSON Schema 2020-12 recursive-reference
+      mechanism. Kiota uses JSON Schema descriptions to generate primitive-based
+      model serialization/deserialization code.
+  - id: openapi-overlay
+    conforms: false
+    role: not-supported
+    evidence: >-
+      No Overlay 1.0.0 support documented; description customization is done with
+      x-* extensions and include/exclude glob filters instead.
+  - id: openapi-specification-extensions
+    conforms: true
+    role: implements
+    evidence: >-
+      Kiota defines and reads a published extension set (x-logo, x-legal-info-url,
+      x-privacy-info-url, x-ai-description, x-ai-reasoning-instructions,
+      x-ai-responding-instructions, x-openai-isConsequential, x-ai-capabilities,
+      x-ms-kiota-info). See vocabulary/kiota-vocabulary.yml.
+  - id: rfc6570-uri-templates
+    conforms: true
+    role: implements
+    evidence: >-
+      Generated request builders carry a UrlTemplate field and per-operation URL
+      template overrides; the abstractions libraries depend on the
+      std-uritemplate implementation. Multiple CHANGELOG entries (1.32.1, 1.32.2)
+      concern URL template override correctness.
+  - id: semver-2.0.0
+    conforms: true
+    role: implements
+    evidence: '"Kiota follows Semantic Versioning 2.0.0" — learn.microsoft.com/en-us/openapi/kiota/support.'
+  - id: keep-a-changelog
+    conforms: true
+    role: implements
+    evidence: CHANGELOG.md states the format is based on Keep a Changelog 1.0.0.
+  - id: rfc9116-security-txt
+    conforms: true
+    role: inherits
+    evidence: >-
+      Covered by Microsoft's organization-wide security.txt at
+      https://www.microsoft.com/.well-known/security.txt (200), which names the
+      MSRC bounty, CVD and safe-harbor policies. Not Kiota-specific.
+  - id: csaf
+    conforms: true
+    role: inherits
+    evidence: >-
+      Microsoft publishes Common Security Advisory Framework provider metadata at
+      https://msrc.microsoft.com/csaf/provider-metadata.json (200), referenced
+      from the security.txt CSAF field. Organization-wide, not Kiota-specific.
+  - id: oauth2
+    conforms: partial
+    role: supports-in-generated-clients
+    evidence: >-
+      Kiota itself exposes no OAuth surface. Generated clients get a
+      BaseBearerTokenAuthenticationProvider plus an access-token-provider contract,
+      and a Microsoft Entra Identity provider in the Azure authentication package;
+      the CLI's own `kiota login github device` uses the GitHub device-code flow
+      for private description repositories.
+  - id: oidc
+    conforms: false
+    role: not-applicable
+    evidence: No OIDC discovery document on any Kiota-related host; there is no Kiota service to authenticate to.
+  - id: rfc9457-problem-details
+    conforms: false
+    role: not-applicable
+    evidence: No HTTP error surface of its own. Error handling in generated clients maps API error responses to typed exceptions per the consumed description.
+  - id: idempotency
+    conforms: false
+    role: not-applicable
+    evidence: >-
+      No HTTP write surface. The nearest analogue is generation idempotence — the
+      kiota-lock.json hash makes a repeat `generate` a no-op when neither the
+      description nor the parameters changed.
+  - id: mcp
+    conforms: false
+    role: not-supported
+    evidence: >-
+      Kiota emits apiplugin, openai and apimanifest plugin types. It does not emit
+      an MCP server, and Microsoft publishes no hosted MCP server for Kiota itself.
+  - id: a2a
+    conforms: false
+    role: not-published
+    evidence: >-
+      No agent card at /.well-known/agent-card.json or /.well-known/agent.json on
+      learn.microsoft.com, www.microsoft.com or microsoft.github.io (all 404).
+  - id: mit-license
+    conforms: true
+    role: licensed-under
+    evidence: https://github.com/microsoft/kiota/blob/main/LICENSE
+supported_languages:
+  note: >-
+    Per-language maturity is versioned and queryable with `kiota info`; see
+    lifecycle/kiota-lifecycle.yml for the maturity-level definitions rather than a
+    frozen table.
+  documented_targets: [csharp, dart, go, java, php, python, ruby, typescript, cli]
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://learn.microsoft.com/en-us/openapi/kiota/overview
+      status: 200
+    - url: https://learn.microsoft.com/en-us/openapi/kiota/support
+      status: 200
+    - url: https://raw.githubusercontent.com/microsoft/kiota/main/CHANGELOG.md
+      status: 200
+    - url: https://www.microsoft.com/.well-known/security.txt
+      status: 200
+    - url: https://learn.microsoft.com/.well-known/agent-card.json
+      status: 404

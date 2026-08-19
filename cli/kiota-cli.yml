@@ -1,0 +1,144 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  https://learn.microsoft.com/en-us/openapi/kiota/using and
+  https://github.com/microsoft/kiota/tree/main/specs/cli (the command
+  specifications maintained in the repo)
+description: >-
+  Kiota IS a CLI — the command line tool is the product, not an accessory to a
+  hosted API. This artifact enumerates its full command surface: the original
+  description-oriented commands (search, download, show, generate, update, info,
+  login, logout) and the newer workspace-oriented commands (workspace, client,
+  plugin) that persist generation configuration in a .kiota/workspace.json file.
+  The binaries and distribution channels are catalogued in
+  packages/kiota-packages.yml.
+docs: https://learn.microsoft.com/en-us/openapi/kiota/using
+command_specs: https://github.com/microsoft/kiota/tree/main/specs/cli
+repo: https://github.com/microsoft/kiota
+install:
+  dotnet_tool: dotnet tool install --global Microsoft.OpenApi.Kiota
+  npm: npm install -g @microsoft/kiota
+  docker: docker run -v ${PWD}:/app/output mcr.microsoft.com/openapi/kiota generate --language typescript -n gfx -d <url>
+  binaries: https://github.com/microsoft/kiota/releases
+  vscode: https://marketplace.visualstudio.com/items?itemName=ms-graph.kiota
+commands:
+  discovery:
+    - name: search
+      description: Search for APIs and their descriptions across registries (APIs.guru, GitHub). Requires internet; cannot run offline.
+      usage: kiota search <searchTerm> [--clear-cache|--cc] [--log-level|--ll <level>] [--version|-v <version>]
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/search.md
+    - name: download
+      description: Download an API description from a registry to a local path. Requires internet.
+      usage: kiota download <searchTerm> [--clean-output|--co] [--output|-o <path>] [--disable-ssl-validation|--dsv]
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/download.md
+    - name: show
+      description: Display the API paths tree for a description, so include/exclude filters can be worked out before generating.
+      usage: kiota show [--openapi|-d <path>] [--max-depth|--m-d <n>] [--include-path|-i <glob>] [--exclude-path|-e <glob>] [--search-key|-k <key>]
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/show.md
+    - name: info
+      description: Show supported languages, their maturity level, and the runtime dependencies a generated client needs.
+      usage: kiota info [--openapi|-d <path>] [--language|-l <language>]
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/info.md
+  generation:
+    - name: generate
+      description: Generate an API client for a target language from an OpenAPI description. Writes a kiota-lock.json alongside the sources capturing every generation parameter plus a hash of the description; regeneration is skipped when neither changed.
+      usage: kiota generate (--openapi|-d <path>) (--language|-l <language>) [--output|-o <path>] [--class-name|-c <name>] [--namespace-name|-n <name>] [--backing-store|-b] [--exclude-backward-compatible|--ebc] [--additional-data|--ad] [--serializer|-s <classes>] [--deserializer|--ds <classes>] [--structured-mime-types|-m <types>] [--include-path|-i <glob>] [--exclude-path|-e <glob>] [--disable-validation-rules|--dvr <rule>] [--type-access-modifier|--tam <modifier>]
+    - name: update
+      description: Update existing clients from previous generations, re-reading the parameters recorded in kiota-lock.json.
+  authentication:
+    - name: login
+      description: Sign in to private API description repositories so search/show/generate can reach private descriptions. Takes a search provider and an authentication strategy.
+      usage: kiota login github device  |  kiota login github pat --pat <value>
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/login.md
+    - name: logout
+      description: Sign out from private API description repositories.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/logout.md
+  workspace:
+    - name: workspace init
+      description: Create a .kiota/workspace.json configuration file in the current working directory.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/workspace-init.md
+    - name: workspace migrate
+      description: Migrate existing kiota-lock.json based clients into the workspace.json model.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/workspace-migrate.md
+  clients:
+    - name: client add
+      description: Register a new API client in workspace.json, cache a local copy of the OpenAPI description under .kiota/documents/{client-name}, and update apimanifest.json.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/client-add.md
+    - name: client edit
+      description: Edit an existing client entry in workspace.json (description location, include/exclude patterns, language, output, class/namespace names).
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/client-edit.md
+    - name: client generate
+      description: Generate source for one or all clients declared in workspace.json.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/client-generate.md
+    - name: client remove
+      description: Remove a client from workspace.json and optionally delete its generated output.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/client-remove.md
+  plugins:
+    - name: plugin add
+      description: Register a plugin in workspace.json. Emits a sliced OpenAPI document plus the chosen plugin artifact. Supported plugin types are apiplugin, openai and apimanifest.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/plugin-add.md
+    - name: plugin edit
+      description: Edit an existing plugin entry in workspace.json.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/plugin-edit.md
+    - name: plugin generate
+      description: Generate the plugin artifacts for one or all plugins declared in workspace.json.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/plugin-generate.md
+    - name: plugin remove
+      description: Remove a plugin from workspace.json and optionally delete its output.
+      spec: https://github.com/microsoft/kiota/blob/main/specs/cli/plugin-remove.md
+plugin_types:
+  - id: apiplugin
+    description: API plugin package for declarative agents in Microsoft 365 Copilot.
+  - id: openai
+    description: OpenAI-style plugin manifest.
+  - id: apimanifest
+    description: API Manifest snapshot of API dependencies and the permissions required to call them.
+key_flows:
+  generate_a_client:
+    command: kiota generate -l csharp -d https://example.com/openapi.yaml -c MyApiClient -n MyApp.Clients -o ./client
+    description: One-shot generation. Produces sources plus kiota-lock.json; re-running is a no-op unless the description or the parameters change.
+  narrow_a_large_description:
+    command: kiota show -d <url> -i "**/messages" ; kiota generate -d <url> -l python -i "**/messages"
+    description: Inspect the path tree first, then generate only the subset needed — the include/exclude glob filters are how Kiota keeps clients small against very large descriptions.
+  workspace_managed_clients:
+    command: kiota workspace init ; kiota client add --client-name Graph -d <url> -l typescript ; kiota client generate
+    description: Configuration-as-file flow. workspace.json plus apimanifest.json describe the whole solution's API surface and permissions and are committed to source control.
+  private_descriptions:
+    command: kiota login github device ; kiota search <term> ; kiota logout
+    description: Device-code sign-in to GitHub so private API description repositories become searchable and generatable.
+environment_variables:
+  - name: KIOTA_CONSOLE_COLORS_ENABLED
+    default: 'true'
+    description: Enable/disable output colorization.
+  - name: KIOTA_CONSOLE_COLORS_SWAP
+    default: 'false'
+    description: Enable/disable inverting the color scheme of the output.
+  - name: KIOTA_TUTORIAL_ENABLED
+    default: 'true'
+    description: Enable/disable displaying extra hints after command execution.
+  - name: KIOTA_OFFLINE_ENABLED
+    default: 'false'
+    description: Enable/disable checking for updates before command execution.
+  - name: KIOTA_CLI_TELEMETRY_OPTOUT
+    default: 'false'
+    description: Enable/disable collecting telemetry.
+generated_artifacts:
+  - name: kiota-lock.json
+    description: Records every generation parameter plus a hash of the description; committed with the generated sources.
+  - name: .kiota/workspace.json
+    description: Workspace configuration for clients and plugins. Schema captured at json-schema/kiota-workspace-schema.json.
+  - name: .kiota/apimanifest.json
+    description: API Manifest — a snapshot of API dependencies and the permissions required to access them, concatenated across all clients and plugins in the solution.
+  - name: .kiota/documents/{name}/
+    description: Cached local copy of each consumed OpenAPI description, used for change detection.
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://learn.microsoft.com/en-us/openapi/kiota/using
+      status: 200
+    - url: https://raw.githubusercontent.com/microsoft/kiota/main/specs/cli/index.md
+      status: 200
+    - url: https://raw.githubusercontent.com/microsoft/kiota/main/specs/cli/plugin-add.md
+      status: 200
+    - url: https://raw.githubusercontent.com/microsoft/kiota/main/specs/cli/login.md
+      status: 200

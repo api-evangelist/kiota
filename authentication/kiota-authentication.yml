@@ -1,0 +1,110 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  https://learn.microsoft.com/en-us/openapi/kiota/authentication and
+  https://github.com/microsoft/kiota/blob/main/specs/cli/login.md
+docs: https://learn.microsoft.com/en-us/openapi/kiota/authentication
+description: >-
+  Kiota has no API of its own to authenticate against, so this profile covers the
+  two authentication surfaces it genuinely publishes. (1) The CLI's own sign-in to
+  private API description repositories — `kiota login github device` (GitHub
+  device code) or a personal access token. (2) The authentication model Kiota
+  builds INTO the clients it generates: a required authentication provider on the
+  request adapter, a set of built-in providers, and an allowed-hosts validator
+  that keeps a token from being attached to an off-allowlist host. The second is
+  the more consequential one — it is the auth posture every Kiota-generated SDK
+  in the world inherits.
+scope: cli-and-generated-clients
+summary:
+  types: [oauth2-device-code, apiKey, http-bearer, anonymous]
+  api_key_in: [header, query]
+  oauth2_flows: [deviceCode]
+  design_note: >-
+    Kiota deliberately requires the authentication provider as a constructor
+    parameter on the request adapter rather than as an HTTP middleware handler, to
+    force the application developer to make a conscious choice about how the API
+    is authenticated.
+cli_authentication:
+  command: kiota login
+  purpose: >-
+    Sign in to private repositories so search, show and generate can reach private
+    API descriptions. `kiota logout` clears it.
+  providers:
+    - search_provider: github
+      strategies:
+        - id: device
+          type: oauth2-device-code
+          usage: kiota login github device
+        - id: pat
+          type: personal-access-token
+          usage: kiota login github pat --pat <value>
+          note: The PAT value is explicitly excluded from telemetry.
+  spec: https://github.com/microsoft/kiota/blob/main/specs/cli/login.md
+generated_client_authentication:
+  interfaces:
+    - name: AuthenticationProvider
+      library: kiota abstractions
+      contract: >-
+        authenticateRequest(request, additionalAuthenticationContext) — completes
+        when the request object has been updated with authentication/authorization
+        information. Implemented per language (IAuthenticationProvider in .NET).
+    - name: AccessTokenProvider
+      library: kiota abstractions
+      contract: >-
+        getAuthorizationToken(uri, additionalAuthenticationContext) returns the
+        access token for the request URI, or null when the request should not be
+        authenticated; also exposes getAllowedHostsValidator().
+  providers:
+    - name: AnonymousAuthenticationProvider
+      type: anonymous
+      description: Placeholder that performs no operation, for APIs that require no authentication.
+    - name: ApiKeyAuthenticationProvider
+      type: apiKey
+      in: [header, query]
+      description: >-
+        Sets a named request header or query parameter to a supplied value.
+        Performs no encoding of the key or value — basic auth callers must
+        base64-encode "userId:password" before passing it in.
+    - name: BaseBearerTokenAuthenticationProvider
+      type: http
+      scheme: bearer
+      description: >-
+        Composes the Authorization bearer header from an AccessTokenProvider
+        implementation, so a new auth scheme only has to implement token
+        acquisition, not header composition.
+    - name: Microsoft Entra Identity authentication provider
+      type: oauth2
+      package: kiota authentication azure (Microsoft.Kiota.Authentication.Azure / microsoft-kiota-authentication-azure)
+      description: >-
+        Acquires access tokens from Microsoft Entra Identity and implements bearer
+        authentication; usable for any API secured by the Microsoft Entra Identity
+        Platform.
+  selection_guidance:
+    - condition: API requires no authentication
+      use: AnonymousAuthenticationProvider
+    - condition: API is protected by Microsoft Identity Platform
+      use: Microsoft Entra Identity authentication provider
+    - condition: API uses an API key in a header or query parameter
+      use: ApiKeyAuthenticationProvider
+    - condition: API uses a bearer token in the Authorization header
+      use: Custom AccessTokenProvider with BaseBearerTokenAuthenticationProvider
+    - condition: Anything else
+      use: Custom AuthenticationProvider
+  security_controls:
+    - name: AllowedHostsValidator
+      description: >-
+        Validates the host of every request against an allowlist before the access
+        token provider returns a token. This is the control that stops a redirect
+        or a hostile server in a description from harvesting a caller's credential.
+    - name: --allowed-external-origins
+      added_in: 1.32.5
+      description: >-
+        External $refs in an OpenAPI description are no longer resolved by default;
+        this parameter opts specific origins, URIs, patterns or paths back in.
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://learn.microsoft.com/en-us/openapi/kiota/authentication
+      status: 200
+    - url: https://raw.githubusercontent.com/microsoft/kiota/main/specs/cli/login.md
+      status: 200

@@ -1,0 +1,180 @@
+name: Kiota
+description: >-
+  Vocabulary of the terms, artifacts, and OpenAPI extensions that make up the
+  Kiota code-generation model. Kiota is unusual in this catalog: it consumes API
+  descriptions rather than publishing one, so its vocabulary is the language of
+  generation — request builders, request adapters, authentication providers,
+  backing stores, workspaces, plugins, API manifests — plus the set of OpenAPI
+  specification extensions Kiota reads to customize and augment its output.
+generated: '2026-08-06'
+method: searched
+source: >-
+  https://learn.microsoft.com/en-us/openapi/kiota/ (Concepts section) and
+  https://github.com/microsoft/kiota/blob/main/specs/extensions/openapi-extensions.md
+version: '1.0'
+created: '2026-08-06'
+modified: '2026-08-06'
+tags:
+  - Code Generation
+  - OpenAPI
+  - SDKs
+  - Developer Tools
+  - API Clients
+
+terms:
+  - term: Request builder
+    definition: >-
+      A generated class representing one path segment of the API. Request builders
+      chain by property access so the URL path is expressed as typed code and the
+      IDE's autocomplete becomes the API discovery mechanism.
+    category: Generated Code
+    docs: https://learn.microsoft.com/en-us/openapi/kiota/request-builders
+  - term: Request adapter
+    definition: >-
+      The abstraction that actually executes an HTTP request. Generated clients
+      depend on the interface, not on a concrete HTTP stack, so the underlying
+      client (HttpClient, OkHttp, fetch, Guzzle, httpx) is a swappable dependency.
+    category: Abstractions
+    docs: https://learn.microsoft.com/en-us/openapi/kiota/abstractions
+  - term: Authentication provider
+    definition: >-
+      The contract a generated client requires in order to authenticate a request.
+      Kiota deliberately makes it a constructor parameter rather than middleware,
+      forcing the developer to make a conscious choice about how the API is
+      authenticated.
+    category: Abstractions
+    docs: https://learn.microsoft.com/en-us/openapi/kiota/authentication
+  - term: Access token provider
+    definition: >-
+      Supplies a bearer token for a given URI, paired with an allowed-hosts
+      validator so a token is never attached to a host outside the allowlist.
+    category: Abstractions
+    docs: https://learn.microsoft.com/en-us/openapi/kiota/authentication
+  - term: Allowed hosts validator
+    definition: >-
+      Utility that checks the host of a request against an allowlist before an
+      access token provider returns a token — the mechanism that stops credentials
+      leaking to a redirected or attacker-controlled host.
+    category: Security
+    docs: https://learn.microsoft.com/en-us/openapi/kiota/authentication
+  - term: Backing store
+    definition: >-
+      Optional model feature that tracks which properties actually changed, so a
+      PATCH sends only the dirty fields instead of the whole object. Enabled with
+      --backing-store.
+    category: Generated Code
+    docs: https://learn.microsoft.com/en-us/openapi/kiota/backing-store
+  - term: Middleware handler
+    definition: >-
+      Composable handler in the HTTP pipeline of a generated client — retry,
+      redirect, compression, telemetry — implemented per language on top of the
+      native HTTP stack.
+    category: Abstractions
+    docs: https://learn.microsoft.com/en-us/openapi/kiota/middleware
+  - term: Serialization provider
+    definition: >-
+      Pluggable parse-node / serialization-writer factory pair per media type
+      (JSON, text, form, multipart). Models serialize themselves through the
+      provider rather than through reflection.
+    category: Abstractions
+    docs: https://learn.microsoft.com/en-us/openapi/kiota/serialization
+  - term: kiota-lock.json
+    definition: >-
+      Lock file written next to generated sources recording every generation
+      parameter plus a hash of the description. Committed to source control;
+      regeneration is skipped when neither the description nor the parameters
+      changed.
+    category: Artifact
+  - term: workspace.json
+    definition: >-
+      Configuration file under .kiota/ declaring every client and plugin in a
+      solution — description location, include/exclude patterns, language, output
+      path, class and namespace names, structured media types, backing store and
+      additional-data flags, and disabled validation rules. Schema captured at
+      json-schema/kiota-workspace-schema.json.
+    category: Artifact
+  - term: API Manifest
+    definition: >-
+      apimanifest.json — a snapshot of the API dependencies of a solution and the
+      permissions required to call them, concatenated across every client and
+      plugin in the workspace. The permissions-facing sibling of workspace.json.
+    category: Artifact
+  - term: Plugin
+    definition: >-
+      A generated agent-facing package rather than a code SDK. Kiota emits a
+      sliced OpenAPI document plus the manifest for the chosen plugin type
+      (apiplugin for Microsoft 365 Copilot declarative agents, openai, or
+      apimanifest).
+    category: Artifact
+  - term: Language maturity level
+    definition: >-
+      Per-language support classification — Stable, Preview, Experimental, or
+      Abandoned — queryable with `kiota info`. Abandoned is the deprecation
+      signal: the language will be removed in a future major release.
+    category: Lifecycle
+    docs: https://learn.microsoft.com/en-us/openapi/kiota/support
+
+openapi_extensions:
+  description: >-
+    OpenAPI specification extensions Kiota reads from a description to customize
+    or augment what it generates. The x-ai-* and x-openai-* set are what turn an
+    ordinary OpenAPI description into an agent-facing plugin — they are the
+    agent-readiness vocabulary Kiota understands.
+  source: https://github.com/microsoft/kiota/blob/main/specs/extensions/openapi-extensions.md
+  generic:
+    - extension: x-logo
+      applies_to: Info
+      definition: Specifies the custom logo image for the API.
+    - extension: x-legal-info-url
+      applies_to: Info
+      definition: Link to a document containing the terms of service.
+    - extension: x-privacy-info-url
+      applies_to: Info
+      definition: Link to the document containing the privacy policy.
+  plugin_specific:
+    - extension: x-ai-description
+      applies_to: Info
+      definition: >-
+        Description of the plugin provided to the model — what the plugin is for
+        and in what circumstances its functions are relevant. Max 2048 characters.
+    - extension: x-ai-reasoning-instructions
+      applies_to: Operations
+      definition: >-
+        Instructions for the orchestrator's reasoning state (when the model can
+        call functions and do computations) about when and how to invoke this
+        operation.
+    - extension: x-ai-responding-instructions
+      applies_to: Operations
+      definition: >-
+        Instructions for the orchestrator's responding state (when the model
+        generates user-visible text and cannot invoke functions).
+    - extension: x-openai-isConsequential
+      applies_to: Operations
+      definition: >-
+        Whether a confirmation dialog must be shown before running the operation.
+        true always prompts and suppresses "Always allow"; false shows the prompt
+        with "Always allow". When absent, GET defaults to false and every other
+        method defaults to true.
+    - extension: x-ai-capabilities
+      applies_to: Info / Operations
+      definition: >-
+        AI capabilities extension; its isNonConsequential confirmation property is
+        mapped to the confirmation object of generated plugin manifest 2.4.
+      added_in: 1.32.5
+  microsoft_specific:
+    - extension: x-ms-kiota-info
+      applies_to: Info
+      definition: >-
+        Kiota-specific hints carried in a description, including client class and
+        namespace names. As of 1.32.5 the values are sanitized before use in
+        generated code and file paths, and the ability to specify dependency
+        install commands through this extension was removed.
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://raw.githubusercontent.com/microsoft/kiota/main/specs/extensions/openapi-extensions.md
+      status: 200
+    - url: https://learn.microsoft.com/en-us/openapi/kiota/authentication
+      status: 200
+    - url: https://learn.microsoft.com/en-us/openapi/kiota/toc.json
+      status: 200

@@ -1,0 +1,32 @@
+generated: '2026-08-06'
+method: searched
+source: https://github.com/microsoft/kiota/blob/main/specs/schemas/workspace.json
+description: >-
+  JSON Schemas published by the Kiota project. Kiota publishes exactly one: the
+  schema for .kiota/workspace.json, the configuration file that declares every
+  generated client and plugin in a solution. It is saved here verbatim. Kiota
+  reads JSON Schema far more than it writes it — the generator consumes JSON
+  Schema 2020-12 inside OpenAPI descriptions to emit model serialization code —
+  but workspace.json is the one schema it authors.
+schemas:
+  - name: Kiota workspace configuration
+    file: kiota-workspace-schema.json
+    file_name_upstream: specs/schemas/workspace.json
+    dialect: https://json-schema.org/2020-12/schema
+    url: https://raw.githubusercontent.com/microsoft/kiota/main/specs/schemas/workspace.json
+    describes: .kiota/workspace.json
+    top_level_properties: [version, clients, plugins]
+    notes: >-
+      clients and plugins are patternProperties maps keyed by consumer name. Client
+      entries carry descriptionLocation, includePatterns, excludePatterns, baseUrl,
+      language, outputPath, clientClassName, clientNamespaceName,
+      structuredMediaTypes, usesBackingStore and includeAdditionalData; plugin
+      entries carry descriptionLocation, includePatterns, excludePatterns, type and
+      outputPath. disabledValidationRules is an array of the validation rule ids
+      catalogued in rules/kiota-validation-rules.yml.
+    official: true
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://raw.githubusercontent.com/microsoft/kiota/main/specs/schemas/workspace.json
+      status: 200

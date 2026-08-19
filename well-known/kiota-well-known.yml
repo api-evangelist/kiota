@@ -1,0 +1,80 @@
+generated: '2026-08-06'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface for every host in
+  apis.yml. Kiota has no API host of its own — it is a CLI — so the hosts probed
+  are its documentation host (learn.microsoft.com), its project site host
+  (microsoft.github.io) and the parent organization host (www.microsoft.com).
+  learn.microsoft.com answers every /.well-known/ path with a 404 that renders a
+  full HTML "page not found" shell, so nothing there is a real document. The one
+  genuine hit is Microsoft's organization-wide RFC 9116 security.txt on
+  www.microsoft.com, saved verbatim; it is also what feeds
+  security/kiota-vulnerability-disclosure.yml.
+hosts:
+  - host: https://learn.microsoft.com
+    role: documentation
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+    note: >-
+      All 404s return an identical 17,528-byte HTML "not found" layout, so the
+      status is a true miss rather than a soft-404 masquerading as content.
+  - host: https://www.microsoft.com
+    role: organization
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/plain
+        file: kiota-security.txt
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://microsoft.github.io
+    role: project-pages
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /kiota/
+        status: 404
+    note: There is no GitHub Pages site for Kiota; documentation lives entirely on Microsoft Learn.
+related:
+  - name: CSAF provider metadata
+    url: https://msrc.microsoft.com/csaf/provider-metadata.json
+    status: 200
+    note: >-
+      Referenced from the security.txt CSAF field. Microsoft publishes machine-readable
+      Common Security Advisory Framework provider metadata; it is org-wide, not Kiota-specific.
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://www.microsoft.com/.well-known/security.txt
+      status: 200
+    - url: https://learn.microsoft.com/.well-known/security.txt
+      status: 404
+    - url: https://learn.microsoft.com/llms.txt
+      status: 404
+    - url: https://msrc.microsoft.com/csaf/provider-metadata.json
+      status: 200

@@ -1,0 +1,266 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  Live registry probes (2026-08-06) of npmjs.org, pypi.org, api.nuget.org,
+  search.maven.org, rubygems.org, repo.packagist.org, pkg.go.dev and
+  mcr.microsoft.com, cross-checked against
+  https://learn.microsoft.com/en-us/openapi/kiota/install and
+  https://github.com/microsoft/kiota
+description: >-
+  Kiota ships two distinct package families, and they version independently.
+  (1) The GENERATOR — the `kiota` CLI itself, distributed as a .NET global tool
+  (Microsoft.OpenApi.Kiota), an npm wrapper (@microsoft/kiota), a container
+  image (mcr.microsoft.com/openapi/kiota), OS binaries on GitHub Releases, and a
+  VS Code extension. These track the tool version (1.34.1 at capture).
+  (2) The RUNTIME LIBRARIES — the per-language abstractions, HTTP, serialization,
+  authentication and bundle packages that generated clients take a dependency on.
+  These live in separate repos (microsoft/kiota-dotnet, kiota-java, kiota-python,
+  kiota-typescript, kiota-go, kiota-php, kiota-ruby) and carry their own version
+  lines. All packages below are published by Microsoft and are first-party.
+families:
+  - name: generator
+    description: The kiota code generator / CLI, in every distribution channel it ships in.
+  - name: runtime
+    description: >-
+      Abstractions, HTTP request adapters, serialization providers, authentication
+      providers and bundles that Kiota-generated clients depend on at runtime.
+      One set per supported language.
+packages:
+  # ---- generator ----
+  - language: dotnet
+    family: generator
+    registry: nuget
+    name: Microsoft.OpenApi.Kiota
+    version: 1.34.1
+    url: https://www.nuget.org/packages/Microsoft.OpenApi.Kiota
+    install: dotnet tool install --global Microsoft.OpenApi.Kiota
+    official: true
+    note: The kiota CLI as a .NET global tool.
+  - language: javascript
+    family: generator
+    registry: npm
+    name: '@microsoft/kiota'
+    version: 1.34.1
+    url: https://www.npmjs.com/package/@microsoft/kiota
+    install: npm install -g @microsoft/kiota
+    official: true
+    note: npm package exposing Kiota CLI functionality to TypeScript.
+  - language: any
+    family: generator
+    registry: container
+    name: mcr.microsoft.com/openapi/kiota
+    url: https://mcr.microsoft.com/en-us/product/openapi/kiota/about
+    install: docker run -v ${PWD}:/app/output mcr.microsoft.com/openapi/kiota generate --language typescript -n gfx -d <description-url>
+    official: true
+    note: Microsoft Container Registry image; tag list confirmed live at mcr.microsoft.com/v2/openapi/kiota/tags/list.
+  - language: any
+    family: generator
+    registry: github-releases
+    name: kiota binaries
+    version: v1.34.1
+    url: https://github.com/microsoft/kiota/releases
+    install: Download linux-x64.zip / osx-arm64.zip / osx-x64.zip / win-x64.zip / win-arm64.zip / win-x86.zip
+    official: true
+  - language: any
+    family: generator
+    registry: vscode-marketplace
+    name: Kiota (preview)
+    url: https://marketplace.visualstudio.com/items?itemName=ms-graph.kiota
+    official: true
+    note: VS Code extension (preview); source in the vscode/ folder of microsoft/kiota.
+
+  # ---- runtime: .NET ----
+  - language: dotnet
+    family: runtime
+    registry: nuget
+    name: Microsoft.Kiota.Abstractions
+    version: 2.0.0
+    url: https://www.nuget.org/packages/Microsoft.Kiota.Abstractions
+    install: dotnet add package Microsoft.Kiota.Abstractions
+    official: true
+  - language: dotnet
+    family: runtime
+    registry: nuget
+    name: Microsoft.Kiota.Bundle
+    version: 2.0.0
+    url: https://www.nuget.org/packages/Microsoft.Kiota.Bundle
+    install: dotnet add package Microsoft.Kiota.Bundle
+    official: true
+  - language: dotnet
+    family: runtime
+    registry: nuget
+    name: Microsoft.Kiota.Http.HttpClientLibrary
+    version: 2.0.0
+    url: https://www.nuget.org/packages/Microsoft.Kiota.Http.HttpClientLibrary
+    install: dotnet add package Microsoft.Kiota.Http.HttpClientLibrary
+    official: true
+
+  # ---- runtime: TypeScript / JavaScript ----
+  - language: typescript
+    family: runtime
+    registry: npm
+    name: '@microsoft/kiota-abstractions'
+    version: 1.0.0-preview.103
+    url: https://www.npmjs.com/package/@microsoft/kiota-abstractions
+    install: npm install @microsoft/kiota-abstractions
+    official: true
+  - language: typescript
+    family: runtime
+    registry: npm
+    name: '@microsoft/kiota-bundle'
+    version: 1.0.0-preview.103
+    url: https://www.npmjs.com/package/@microsoft/kiota-bundle
+    install: npm install @microsoft/kiota-bundle
+    official: true
+  - language: typescript
+    family: runtime
+    registry: npm
+    name: '@microsoft/kiota-http-fetchlibrary'
+    version: 1.0.0-preview.103
+    url: https://www.npmjs.com/package/@microsoft/kiota-http-fetchlibrary
+    install: npm install @microsoft/kiota-http-fetchlibrary
+    official: true
+  - language: typescript
+    family: runtime
+    registry: npm
+    name: '@microsoft/kiota-serialization-json'
+    version: 1.0.0-preview.103
+    url: https://www.npmjs.com/package/@microsoft/kiota-serialization-json
+    install: npm install @microsoft/kiota-serialization-json
+    official: true
+
+  # ---- runtime: Python ----
+  - language: python
+    family: runtime
+    registry: pypi
+    name: microsoft-kiota-abstractions
+    version: 1.11.7
+    url: https://pypi.org/project/microsoft-kiota-abstractions/
+    install: pip install microsoft-kiota-abstractions
+    official: true
+  - language: python
+    family: runtime
+    registry: pypi
+    name: microsoft-kiota-bundle
+    version: 1.11.7
+    url: https://pypi.org/project/microsoft-kiota-bundle/
+    install: pip install microsoft-kiota-bundle
+    official: true
+  - language: python
+    family: runtime
+    registry: pypi
+    name: microsoft-kiota-http
+    version: 1.11.7
+    url: https://pypi.org/project/microsoft-kiota-http/
+    install: pip install microsoft-kiota-http
+    official: true
+  - language: python
+    family: runtime
+    registry: pypi
+    name: microsoft-kiota-serialization-json
+    version: 1.11.7
+    url: https://pypi.org/project/microsoft-kiota-serialization-json/
+    install: pip install microsoft-kiota-serialization-json
+    official: true
+
+  # ---- runtime: Java ----
+  - language: java
+    family: runtime
+    registry: maven-central
+    name: com.microsoft.kiota:microsoft-kiota-abstractions
+    version: 1.8.5
+    url: https://central.sonatype.com/artifact/com.microsoft.kiota/microsoft-kiota-abstractions
+    official: true
+  - language: java
+    family: runtime
+    registry: maven-central
+    name: com.microsoft.kiota:microsoft-kiota-bundle
+    version: 1.8.5
+    url: https://central.sonatype.com/artifact/com.microsoft.kiota/microsoft-kiota-bundle
+    official: true
+  - language: java
+    family: runtime
+    registry: maven-central
+    name: com.microsoft.kiota:microsoft-kiota-http-okHttp
+    version: 1.8.5
+    url: https://central.sonatype.com/artifact/com.microsoft.kiota/microsoft-kiota-http-okHttp
+    official: true
+  - language: java
+    family: runtime
+    registry: maven-central
+    name: com.microsoft.kiota:microsoft-kiota-authentication-azure
+    version: 1.8.5
+    url: https://central.sonatype.com/artifact/com.microsoft.kiota/microsoft-kiota-authentication-azure
+    official: true
+  - language: java
+    family: runtime
+    registry: maven-central
+    name: com.microsoft.kiota:microsoft-kiota-serialization-json
+    version: 1.8.5
+    url: https://central.sonatype.com/artifact/com.microsoft.kiota/microsoft-kiota-serialization-json
+    official: true
+
+  # ---- runtime: Go ----
+  - language: go
+    family: runtime
+    registry: go-modules
+    name: github.com/microsoft/kiota-abstractions-go
+    url: https://pkg.go.dev/github.com/microsoft/kiota-abstractions-go
+    install: go get github.com/microsoft/kiota-abstractions-go
+    official: true
+
+  # ---- runtime: PHP ----
+  - language: php
+    family: runtime
+    registry: packagist
+    name: microsoft/kiota-abstractions
+    version: 2.0.2
+    url: https://packagist.org/packages/microsoft/kiota-abstractions
+    install: composer require microsoft/kiota-abstractions
+    official: true
+
+  # ---- runtime: Ruby ----
+  - language: ruby
+    family: runtime
+    registry: rubygems
+    name: microsoft_kiota_abstractions
+    version: 0.15.1
+    url: https://rubygems.org/gems/microsoft_kiota_abstractions
+    install: gem install microsoft_kiota_abstractions
+    official: true
+  - language: ruby
+    family: runtime
+    registry: rubygems
+    name: microsoft_kiota_serialization_json
+    version: 0.10.0
+    url: https://rubygems.org/gems/microsoft_kiota_serialization_json
+    install: gem install microsoft_kiota_serialization_json
+    official: true
+unofficial_channels:
+  - name: Homebrew
+    note: Documented on the install page but explicitly marked UNOFFICIAL by Microsoft.
+  - name: asdf
+    note: Documented on the install page but explicitly marked UNOFFICIAL by Microsoft.
+  - name: REST API Client Code Generator (Visual Studio extension)
+    note: Documented on the install page but explicitly marked UNOFFICIAL by Microsoft.
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://registry.npmjs.org/@microsoft/kiota
+      status: 200
+    - url: https://pypi.org/pypi/microsoft-kiota-abstractions/json
+      status: 200
+    - url: https://api.nuget.org/v3-flatcontainer/microsoft.openapi.kiota/index.json
+      status: 200
+    - url: https://search.maven.org/solrsearch/select?q=g:com.microsoft.kiota
+      status: 200
+    - url: https://rubygems.org/api/v1/gems/microsoft_kiota_abstractions.json
+      status: 200
+    - url: https://repo.packagist.org/p2/microsoft/kiota-abstractions.json
+      status: 200
+    - url: https://pkg.go.dev/github.com/microsoft/kiota-abstractions-go
+      status: 200
+    - url: https://mcr.microsoft.com/v2/openapi/kiota/tags/list
+      status: 200
+    - url: https://marketplace.visualstudio.com/items?itemName=ms-graph.kiota
+      status: 200

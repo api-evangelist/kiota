@@ -1,0 +1,105 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  https://learn.microsoft.com/en-us/openapi/kiota/support,
+  https://github.com/microsoft/kiota/blob/main/CHANGELOG.md,
+  https://github.com/microsoft/kiota/blob/main/SUPPORT.md,
+  https://github.com/microsoft/kiota/releases
+description: >-
+  Kiota is a shipped developer tool, not a hosted service, so its lifecycle
+  posture is a release/support policy rather than an API version policy: Semantic
+  Versioning, a documented monthly minor cadence, side-by-side installation, an
+  explicit "latest major only" support window, and a per-language maturity ladder
+  (Stable / Preview / Experimental / Abandoned) where "Abandoned" is the
+  deprecation signal — the language stays until the next major release and users
+  are told to migrate off. There is no status page, because there is no service
+  to have status: Kiota runs on the developer's machine or in their CI.
+versioning:
+  scheme: semver
+  spec: https://semver.org/spec/v2.0.0.html
+  current: 1.34.1
+  docs: https://learn.microsoft.com/en-us/openapi/kiota/support
+  release_types:
+    - type: major
+      contains: New features, new public API surface area, bug fixes. Breaking changes are expected.
+      cadence: As needed.
+      support: Only the latest major release is maintained, except for security and privacy issues where patches may ship to prior majors.
+      side_by_side: true
+    - type: minor
+      contains: New features, public API surface area, bug fixes. No breaking changes to the tooling experience or to the generated API surface of Stable maturity languages.
+      cadence: Targeted for the first Tuesday of every month.
+      side_by_side: true
+    - type: patch
+      contains: Security and non-security bug fixes.
+      cadence: As needed.
+  roll_forward: >-
+    Installing a new version of the tooling does not affect existing generated
+    code. Applications do not automatically roll forward; code must be
+    regenerated with the new tooling, and Microsoft recommends rebuilding and
+    testing against a newer major or minor before deploying to production.
+deprecation:
+  policy_url: https://learn.microsoft.com/en-us/openapi/kiota/support
+  changelog: https://github.com/microsoft/kiota/blob/main/CHANGELOG.md
+  sunset_header: false
+  mechanism: language maturity ladder + semver major
+  notes: >-
+    Deprecation is expressed two ways. (1) Language maturity: a language marked
+    "Abandoned" is no longer maintained and will be removed in a future major
+    release; users are explicitly told to start migrating off the generated
+    client for that language. (2) Generated code: Kiota emits extra
+    backward-compatibility code marked obsolete, which is removed in the next
+    major version; --exclude-backward-compatible (--ebc) opts out of emitting it.
+    RFC 8594 Sunset/Deprecation headers do not apply — Kiota is a CLI, not an
+    HTTP service.
+  maturity_levels:
+    - level: stable
+      definition: Kiota provides full functionality for the language and is used to generate production API clients.
+    - level: preview
+      definition: Kiota is at or near the level of stable but isn't being used to generate production API clients.
+    - level: experimental
+      definition: Kiota provides some functionality for the language but is still in early stages; some features might not work correctly or at all.
+    - level: abandoned
+      definition: The language is not maintained anymore and will be removed in a future major release; users should start migrating off the generated client for the language.
+  support_experience:
+    - level: microsoft
+      definition: Implemented by the Kiota team at Microsoft; users can expect support from the team as with any regular product.
+    - level: community
+      definition: Implemented by the broader Kiota community; users can expect help from other community members but not direct Microsoft support.
+  live_query:
+    command: kiota info
+    note: >-
+      The authoritative, current maturity level per language is whatever
+      `kiota info` prints for the installed version. This artifact deliberately
+      does not freeze the per-language table, because it moves between releases.
+sla:
+  url: null
+  public_uptime_target: null
+  notes: >-
+    No SLA and no uptime commitment — Kiota is MIT-licensed software that runs
+    locally. Microsoft's published support policy for the project is explicitly
+    limited to the GitHub channels listed in SUPPORT.md.
+status_page: null
+status_page_notes: >-
+  None published, and none applicable: the tool has no hosted runtime. The two
+  network dependencies it does have are third-party registries reached by
+  `kiota search`/`kiota download` (APIs.guru, GitHub), whose availability Kiota
+  does not report on.
+support:
+  primary_channel: https://github.com/microsoft/kiota/issues
+  discussions: https://github.com/microsoft/kiota/discussions
+  policy: https://github.com/microsoft/kiota/blob/main/SUPPORT.md
+  docs: https://learn.microsoft.com/en-us/openapi/kiota/support
+license:
+  spdx: MIT
+  url: https://github.com/microsoft/kiota/blob/main/LICENSE
+x-evidence:
+  fetched: '2026-08-06'
+  probes:
+    - url: https://learn.microsoft.com/en-us/openapi/kiota/support
+      status: 200
+    - url: https://raw.githubusercontent.com/microsoft/kiota/main/SUPPORT.md
+      status: 200
+    - url: https://github.com/microsoft/kiota/discussions
+      status: 200
+    - url: https://github.com/microsoft/kiota/blob/main/LICENSE
+      status: 200
