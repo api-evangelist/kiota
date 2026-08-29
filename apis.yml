@@ -16,6 +16,18 @@ description: >-
   vocabulary, and a nine-rule description validation ruleset it runs before every
   generation.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: open-source
   onboarding: self-service
