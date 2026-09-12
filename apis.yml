@@ -1,5 +1,6 @@
 aid: kiota
 name: Kiota
+x-parent: microsoft
 description: >-
   Kiota is Microsoft's open source (MIT) API client generator: a command line
   tool that turns any OpenAPI-described API into a strongly-typed, lightweight
