@@ -1,6 +1,6 @@
-generated: '2026-08-06'
-method: searched
-source: https://learn.microsoft.com/en-us/openapi/kiota/using#--disable-validation-rules---dvr
+x-generated: '2026-08-06'
+x-method: searched
+x-source: https://learn.microsoft.com/en-us/openapi/kiota/using#--disable-validation-rules---dvr
 description: >-
   Kiota ships an OpenAPI description linter and runs it before every generation.
   This is a genuine, published governance ruleset — it is the set of description
@@ -11,13 +11,13 @@ description: >-
   (including the rules inherited from OpenAPI.net) with --disable-validation-rules all.
   Per-client suppressions are persisted in the disabledValidationRules array of
   .kiota/workspace.json.
-docs: https://learn.microsoft.com/en-us/openapi/kiota/using
-flag: --disable-validation-rules (--dvr)
-inherits: OpenAPI.net validation rules
-severity_model: >-
+x-docs: https://learn.microsoft.com/en-us/openapi/kiota/using
+x-flag: --disable-validation-rules (--dvr)
+x-inherits: OpenAPI.net validation rules
+x-severity_model: >-
   Every Kiota-specific rule below emits a warning; warnings do not stop
   generation. There are no error-severity Kiota rules.
-rule_count: 9
+x-rule_count: 9
 rules:
   - id: DivergentResponseSchema
     severity: warning
