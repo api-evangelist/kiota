@@ -102,6 +102,8 @@ apis:
       - type: ChangeLog
         url: changelog/kiota-changelog.yml
 common:
+  - type: VendorFacets
+    url: vendor-facets/kiota-vendor-facets.yml
   - type: Releases
     url: https://github.com/microsoft/kiota/releases
   - type: SecurityPolicy
