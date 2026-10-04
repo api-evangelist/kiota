@@ -18,16 +18,21 @@ description: >-
   generation.
 type: Index
 deliveryModel:
-  model: unknown
-  open_source: unknown
+  model: open-core
+  license: MIT
+  license_evidence:
+    repo: microsoft/kiota
+    spdx: MIT
+    stars: 3823
+  open_source: true
   commercial: true
   callable_host: false
-  label: Delivery model not determined — needs a product licence on record
-  confidence: low
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: medium
   source:
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-license
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: open-source
@@ -50,9 +55,10 @@ tags:
   - SDK
   - Developer Tools
   - API Client
-  - Open-Source
+  - Open Source
   - CLI
-  - JSON-Schema
+  - JSON Schema
+  - SDK Generation
 tags_raw:
   - Code Generation
   - Microsoft
@@ -63,6 +69,9 @@ tags_raw:
   - Open Source
   - CLI
   - JSON Schema
+  - Open-Source
+  - JSON-Schema
+  - SDK Generation
 url: >-
   https://raw.githubusercontent.com/api-evangelist/kiota/refs/heads/main/apis.yml
 created: '2026-03-25'
