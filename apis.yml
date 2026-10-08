@@ -111,6 +111,12 @@ apis:
       - type: ChangeLog
         url: changelog/kiota-changelog.yml
 common:
+  - type: Plans
+    url: plans/kiota-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/kiota-rate-limits.yml
+  - type: FinOps
+    url: finops/kiota-finops.yml
   - type: VendorFacets
     url: vendor-facets/kiota-vendor-facets.yml
   - type: Releases
