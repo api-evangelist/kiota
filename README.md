@@ -1,4 +1,4 @@
-# Kiota (kiota)
+# Kiota
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,50 +64,131 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Kiota is an open source API client generator from Microsoft that produces strongly-typed, lightweight clients from OpenAPI descriptions. It supports C#, Go, Java, PHP, Python, Ruby, Swift, and TypeScript, with a focus on minimal dependencies and idiomatic code patterns.
+Kiota is Microsoft's open source (MIT) API client generator: a command line tool that turns any OpenAPI-described API into a strongly-typed, lightweight client in C#, Dart, Go, Java, PHP, Python, Ruby or TypeScript. It exists to remove the need to take a dependency on a different hand-written SDK for every API you call. Kiota generates only the source it needs on top of a small per-language core library, keeps external dependencies minimal, and can target a filtered subset of a large description. Beyond code SDKs it also emits agent-facing plugin packages — apiplugin for Microsoft 365 Copilot declarative agents, openai manifests, and API Manifest permission snapshots. Kiota is a consumer of API descriptions rather than a publisher of an API: there is no Kiota endpoint, base URL, API key or status page. Its surface is a CLI, runtime libraries in eight package registries, a published OpenAPI extension vocabulary, and a nine-rule description validation ruleset it runs before every generation.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/kiota/refs/heads/main/apis.yml)
+**Areas:** Code Generation · Microsoft · OpenAPI · SDK · Developer Tools · API Client · Open Source · CLI · JSON Schema · SDK Generation
 
-## Scope
+## Kiota on APIs.io
 
-- **Type:** Index
+Everything profiled for Kiota is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kiota/](https://apis.io/providers/kiota/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (1)
 
-- Code Generation, Microsoft, OpenAPI, SDKs
+- [Kiota](https://apis.io/apis/kiota/kiota/) — Kiota generates strongly-typed, lightweight API clients from OpenAPI descriptions in C#, Dart, Go, Java, PHP, Python, Ruby and TypeScript, with minimal…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-25
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### JSON Schema (1)
 
-### Kiota
+The data models the API reads and writes.
 
-Kiota generates strongly-typed, lightweight API clients from OpenAPI descriptions in multiple languages with minimal dependencies and idiomatic code patterns.
+- [Kiota Workspace](https://apis.io/schemas/kiota/kiota-workspace/)
 
-**Human URL:** [https://learn.microsoft.com/en-us/openapi/kiota/](https://learn.microsoft.com/en-us/openapi/kiota/)
+#### Vocabulary (1)
 
-#### Tags
+The provider's domain terms, defined.
 
-- Code Generation, OpenAPI, SDKs
+- [Kiota Vocabulary](https://apis.io/vocabularies/kiota/kiota-vocabulary/)
 
-#### Properties
+#### Governance rules (1)
 
-- [Documentation](https://learn.microsoft.com/en-us/openapi/kiota/overview)
-- [Getting Started](https://learn.microsoft.com/en-us/openapi/kiota/quickstarts/)
-- [GitHub Repository](https://github.com/microsoft/kiota)
+Spectral rulesets for the provider's contracts.
 
-## Common Properties
+- [Kiota — validation rules](https://apis.io/rules/kiota/kiota-validation-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Kiota Authentication](https://apis.io/security/kiota/kiota-authentication/)
+- [Kiota Domain Security](https://apis.io/security/kiota/kiota-domain-security/)
+- [Kiota Vulnerability Disclosure](https://apis.io/security/kiota/kiota-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Kiota Plans Pricing](https://apis.io/plans/kiota/kiota-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Kiota Rate Limits](https://apis.io/rate-limits/kiota/kiota-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Kiota Finops](https://apis.io/finops/kiota/kiota-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://learn.microsoft.com/en-us/openapi/kiota/)
 - [Documentation](https://learn.microsoft.com/en-us/openapi/kiota/overview)
-- [GitHub Organization](https://github.com/microsoft/kiota)
+- [Getting started](https://learn.microsoft.com/en-us/openapi/kiota/quickstarts/)
+- [API reference](https://learn.microsoft.com/en-us/openapi/kiota/using)
+- [Support](https://github.com/microsoft/kiota/issues)
 - [Blog](https://devblogs.microsoft.com/microsoft365dev/)
+- [Terms of service](https://learn.microsoft.com/en-us/legal/termsofuse)
+- [Privacy policy](https://privacy.microsoft.com/en-us/privacystatement)
+- [GitHub](https://github.com/microsoft/kiota)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 45.0** — developing · rubric 0.25.0 · scored 2026-10-23
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 0.0 |
+| Contract governance | 33.3 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 71.4 |
+| Access clarity | 28.9 |
+
+**Agent readiness 3.1** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kiota/](https://apis.io/providers/kiota/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kiota: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kiota/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
