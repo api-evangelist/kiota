@@ -20,12 +20,15 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/kiota-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
   integrations/kiota-integration-edges.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: searched
+    evidence: declared in the artifact
   json-schema/kiota-json-schema.yml:
     method: searched
     evidence: declared in the artifact
@@ -104,6 +107,9 @@ artifacts:
   lifecycle/kiota-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
+  llms/kiota-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
   llms/kiota-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
@@ -126,6 +132,9 @@ artifacts:
     method: searched
     evidence: declared in the artifact
   vendor-facets/kiota-vendor-facets.yml:
+    method: unknown
+    evidence: no authorship recorded
+  vendors/kiota-vendors.yml:
     method: unknown
     evidence: no authorship recorded
   vocabulary/kiota-vocabulary.yml:
